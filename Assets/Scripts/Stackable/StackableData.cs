@@ -8,5 +8,7 @@ namespace Stackable
     public class StackableData : ScriptableObject
     {
         public StackableType stackableType;
+        public bool isPurchasable;
+        public float price;
     }
 }

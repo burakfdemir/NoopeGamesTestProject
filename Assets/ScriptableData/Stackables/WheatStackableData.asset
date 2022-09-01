@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: WheatStackableData
   m_EditorClassIdentifier: 
   stackableType: 1
+  isPurchasable: 1
+  price: 1

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8219261623867478119}
   - component: {fileID: 6018149890994974125}
   m_Layer: 0
-  m_Name: Wheat
+  m_Name: WheatStackable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 2135142952258280284, guid: f7c673cdc5d638341a4d1098101a5073,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.284619
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2135142952258280284, guid: f7c673cdc5d638341a4d1098101a5073,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 2135142952258280284, guid: f7c673cdc5d638341a4d1098101a5073,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.021763
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2135142952258280284, guid: f7c673cdc5d638341a4d1098101a5073,
         type: 3}

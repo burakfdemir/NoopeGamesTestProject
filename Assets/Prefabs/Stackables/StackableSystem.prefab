@@ -79,5 +79,5 @@ MonoBehaviour:
   stackablePrefabs:
   - {fileID: 6018149890994974125, guid: 5dc331f0e989f6d48bef223e35b4ec92, type: 3}
   - {fileID: 607279621988650067, guid: 41221736903292d4790c1dfaa802b726, type: 3}
-  stackablesStartTransform: {fileID: 1032968019072155982}
+  - {fileID: 3335294962696445014, guid: b3f5875af6f517748a411028402d8402, type: 3}
   stackableDistance: {x: 0, y: 1, z: 0}

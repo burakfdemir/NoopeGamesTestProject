@@ -1,6 +1,6 @@
 ﻿namespace Plants
 {
-    public class Carrot : PlantBase
+    public class Carrot : FieldBase
     {
         
     }

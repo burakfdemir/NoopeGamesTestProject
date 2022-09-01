@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plants
 {
-    public interface IPlant
+    public interface IField
     {
         void Grow(Vector3 target);
         void Pick();

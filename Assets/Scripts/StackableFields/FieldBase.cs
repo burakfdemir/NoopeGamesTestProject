@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Plants
 {
-    public class PlantBase : MonoBehaviour, IPlant
+    public class FieldBase : MonoBehaviour, IField
     {
         [SerializeField] private PlantData data;
         [SerializeField] private GameObject plantObject;
@@ -31,12 +31,14 @@ namespace Plants
         public virtual void Pick()
         {
             plantObject.SetActive(false);
+            OnPick?.Invoke();
         }
 
         protected virtual IEnumerator GrowCor()
         {
             yield return _wait;
             plantObject.SetActive(true);
+            OnGrow?.Invoke();
         }
     }
 }

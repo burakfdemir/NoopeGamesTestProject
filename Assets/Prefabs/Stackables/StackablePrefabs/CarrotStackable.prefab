@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7086286227475012107}
   - component: {fileID: 607279621988650067}
   m_Layer: 0
-  m_Name: Carrot
+  m_Name: CarrotStackable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,17 +61,17 @@ PrefabInstance:
     - target: {fileID: 1342110966713328315, guid: 779e798ec91d3164e90f09977ddfb711,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342110966713328315, guid: 779e798ec91d3164e90f09977ddfb711,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.027642079
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342110966713328315, guid: 779e798ec91d3164e90f09977ddfb711,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342110966713328315, guid: 779e798ec91d3164e90f09977ddfb711,
         type: 3}

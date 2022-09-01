@@ -8,10 +8,9 @@ namespace Stackable
     public class StackableSystem : MonoBehaviour
     {
         [SerializeField] private List<StackableBase> stackablePrefabs;
-        //[SerializeField] private Transform stackablesStartTransform;
         [SerializeField] private Vector3 stackableDistance = Vector3.one;
         private Stack<StackableBase> _stackables;
-        private Dictionary<StackableType,ObjectPool<StackableBase>> _stackablePools;
+        private Dictionary<StackableType, ObjectPool<StackableBase>> _stackablePools;
 
         private int _counter;
 
@@ -25,23 +24,41 @@ namespace Stackable
         {
             if (_stackables.Count != 0)
             {
-                if(stackable != _stackables.Peek().StackableData.stackableType) return;
+                if (stackable != _stackables.Peek().StackableData.stackableType) return;
             }
 
             var newStackable = GetStackable(stackable);
             SetStackablePosition(newStackable.transform);
             _stackables.Push(newStackable);
-            
+
             _counter++;
         }
 
-        public void Pop()
+        public StackableBase Pop()
         {
-            if(_stackables.Count == 0) return;
-            
+            if (_stackables.Count == 0) return default;
+
             var stackable = _stackables.Pop();
             _stackablePools[stackable.StackableData.stackableType].Return(stackable);
             _counter--;
+            return stackable;
+        }
+
+        public StackableType GetCurrentStackType()
+        {
+            return _stackables.Count == 0 ? StackableType.None : _stackables.Peek().StackableData.stackableType;
+        }
+
+        public bool IsCurrentStackPurchasable()
+        {
+            if (_stackables.Count == 0) return false;
+            return _stackables.Peek().StackableData.isPurchasable;
+        }
+
+        public StackableData GetCurrentStackableData()
+        {
+            if (_stackables.Count == 0) return default;
+            return _stackables.Peek().StackableData;
         }
 
         private void CreatePools()
@@ -52,7 +69,7 @@ namespace Stackable
             {
                 var pool = new ObjectPool<StackableBase>(() =>
                     {
-                        var newObj =  Instantiate(prefab, transform,false)
+                        var newObj = Instantiate(prefab, transform, true)
                             .GetComponent<StackableBase>();
                         newObj.gameObject.SetActive(false);
                         return newObj;
@@ -62,7 +79,7 @@ namespace Stackable
                     (stackable) => stackable.gameObject.SetActive(false));
 
                 var typeCheckObject = pool.Get();
-                _stackablePools.Add(typeCheckObject.StackableData.stackableType,pool);
+                _stackablePools.Add(typeCheckObject.StackableData.stackableType, pool);
                 pool.Return(typeCheckObject);
             }
         }
@@ -77,16 +94,10 @@ namespace Stackable
             sTransform.position = transform.position + _counter * stackableDistance;
         }
 
-        [ContextMenu("Test")]
-        public void Test()
-        {
-            Push(StackableType.Wheat);
-        }
-
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position,1f);
+            Gizmos.DrawSphere(transform.position, 1f);
         }
     }
 
@@ -94,6 +105,7 @@ namespace Stackable
     {
         None,
         Wheat,
-        Carrot
+        Carrot,
+        Money
     }
 }
