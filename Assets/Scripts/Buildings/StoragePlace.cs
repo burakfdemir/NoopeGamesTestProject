@@ -10,8 +10,10 @@ namespace Buildings
     public class StoragePlace : PurchasableBuilding
     {
         [SerializeField] private StackableSystem storageStackableSystem;
+        [SerializeField] private bool canStorePlayerItems = true;
         private Coroutine _storageCor;
         private Coroutine _moneyCor;
+
         protected override void Start()
         {
             base.Start();
@@ -21,7 +23,7 @@ namespace Buildings
         private void OnTriggerEnter(Collider other)
         {
             if (!ValidateSystem(other, out var system)) return;
-            if(!ValidatePurchaseStatus(system)) return;
+            if (!ValidatePurchaseStatus(system)) return;
 
             if (!isBuildingPurchased)
             {
@@ -34,7 +36,7 @@ namespace Buildings
 
             if (systemStackType == StackableType.None &&
                 ownSystemType == StackableType.None) return;
-            
+
             if (ownSystemType != StackableType.None &&
                 (ownSystemType != systemStackType && systemStackType != StackableType.None)) return;
 
@@ -45,6 +47,8 @@ namespace Buildings
         {
             if (system.GetCurrentStackType() != StackableType.None)
             {
+                if(!canStorePlayerItems) yield break;
+                
                 var stackableItem = system.Pop();
                 do
                 {
@@ -61,9 +65,8 @@ namespace Buildings
                     system.Push(stackableItem.StackableData.stackableType);
                     stackableItem = storageStackableSystem.Pop();
                     yield return wait;
-                } while ( stackableItem != null);
+                } while (stackableItem != null);
             }
-
         }
 
         protected override bool ValidatePurchaseStatus(StackableSystem system)
@@ -72,6 +75,16 @@ namespace Buildings
             if (isBuildingPurchased) return true;
             if (!isBuildingPurchased && systemStackType != StackableType.Money) return false;
             return true;
+        }
+
+        public void Push(StackableType type)
+        {
+            storageStackableSystem.Push(type);
+        }
+
+        public void HideText()
+        {
+            priceText.enabled = false;
         }
     }
 }

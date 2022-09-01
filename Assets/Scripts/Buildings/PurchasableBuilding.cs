@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Stackable;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace Buildings.Bank
         [SerializeField] protected TextMeshProUGUI priceText;
         protected bool isBuildingPurchased;
         protected int currentGivenMoney;
+        public event Action OnBuildingPurchased;
+        
         protected virtual void UpdateText()
         {
             priceText.text = GetInfoText();
@@ -46,6 +49,7 @@ namespace Buildings.Bank
                 {
                     isBuildingPurchased = true;
                     UpdateText();
+                    OnBuildingPurchased?.Invoke();
                     yield break;
                 }
                 UpdateText();

@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Player
@@ -11,10 +12,12 @@ namespace Player
         {
             var vertical = Input.GetAxis("Vertical");
             var horizontal = Input.GetAxis("Horizontal");
-            var speed = data.speed;
+            var speed = data.movementSpeed;
 
-            transform.position +=
-                new Vector3(horizontal * speed * Time.deltaTime, 0f, vertical * speed * Time.deltaTime);
+            var playerTransform = transform;
+            var oldPos = playerTransform.position;
+            var newPos = new Vector3(horizontal * speed * Time.deltaTime, 0f, vertical * speed * Time.deltaTime);
+            playerTransform.position += newPos;
         }
     }
 }

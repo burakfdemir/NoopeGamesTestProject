@@ -16,7 +16,7 @@ MonoBehaviour:
   isStore: 1
   isPurchasableBuilding: 1
   buildingPrice: 30000
-  productCreationTime: 5
+  productCreationTime: 20
   sellingType: 0
   buyingTypes: 
   stackItemPopTime: 0.1

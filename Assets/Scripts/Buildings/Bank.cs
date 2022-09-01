@@ -7,8 +7,6 @@ namespace Buildings.Bank
 {
     public class Bank : BuildingBase
     {
-        [SerializeField] private float waitTime = .1f;
-        
         private Coroutine _bankCor;
 
         public static int oneUnitMoneyPrice = 1000;
@@ -23,8 +21,8 @@ namespace Buildings.Bank
 
         private IEnumerator BankOperationCor(StackableSystem system)
         {
+            var stackableDataPrice = system.GetCurrentStackableData().price;
             var stackable = system.Pop();
-            var stackableData = system.GetCurrentStackableData();
             var itemCounter = 0;
             
             do
@@ -35,7 +33,7 @@ namespace Buildings.Bank
                 yield return wait;
             } while (stackable != null);
 
-            for (int i = 0; i < itemCounter * stackableData.price; i++)
+            for (int i = 0; i < itemCounter * stackableDataPrice; i++)
             {
                 system.Push(StackableType.Money);
                 yield return wait;
